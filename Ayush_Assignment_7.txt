@@ -1,0 +1,231 @@
+Solution.1:
+
+# Class representing a bank account
+class Bank_account:
+
+    # Constructor to initialize account details
+    def __init__(self, depositor_name, account_number, account_type, amount_balace):
+        self.depositor_name = depositor_name              # Name of the depositor
+        self.account_number = int(account_number)         # Account number (converted to int)
+        self.account_type = account_type                  # Type of account (Savings/Current etc.)
+        self.amount_balace = int(amount_balace)           # Current balance (converted to int)
+
+    # Method to deposit money into the account
+    def deposit_amount(self, amount):
+        self.amount_balace = self.amount_balace + amount
+
+    # Method to withdraw money from the account
+    def withdraw_amount(self, amount):
+        self.amount_balace = self.amount_balace - amount
+
+    # Method to display account holder's name and balance
+    def display(self):
+        print(f"Name : {self.depositor_name.capitalize()}\nBalance : {self.amount_balace}")
+
+
+# List to store all bank account objects
+users = []
+
+# Infinite loop for menu-driven program
+while True:
+    # Display menu and take user choice
+    entry = int(input("1.New customer\n\
+2.Deposit\n\
+3.Withdrawal\n\
+4.Display\n\
+5.Exit\n\n\
+Enter your choice: "))
+    
+    # Option 1: Create a new customer account
+    if entry == 1:
+        # Taking all details in one line, separated by commas
+        name, number, type, balance = input(
+            "Enter Depositor Name, Account Number, Account Type, Amount Balance: "
+        ).strip().split(',')
+        
+        # Storing data in users list for easy retrieval
+        users.append(Bank_account(name, number, type, balance))
+        print("\n\n----Customer created.----\n\n")
+
+    # Option 2: Deposit money into an account
+    if entry == 2:
+        account = input("Enter Account Number: ")
+        deposit = int(input("Enter deposit amount: "))
+        
+        # Search for the user in the list
+        for user in users:
+            if user.account_number == account:
+                user.deposit_amount(deposit)  # Call deposit method
+                print("\n\n----Deposit Successful.----\n\n")
+                break
+        else:
+            # This else runs if no break occurred (user not found)
+            print("\n\n----User not found.----\n\n")
+
+    # Option 3: Withdraw money from an account
+    if entry == 3:
+        account = input("Enter Account Number: ")
+        withdraw = int(input("Enter withdraw amount: "))
+        
+        for user in users:
+            if user.account_number == account:
+                user.withdraw_amount(withdraw)  # Call withdraw method
+                print("\n\n----Withdrawal Successful.----\n\n")
+                break
+        else:
+            print("\n\n----User not found.----\n\n")
+
+    # Option 4: Display account details
+    if entry == 4:
+        # Check if list is empty
+        if not users:
+            print("\n\n----The list is empty----\n\n")
+        else:
+            account = input("Enter Account Number: ")
+            for user in users:
+                if user.account_number == account:
+                    user.display()  # Call display method
+                    print("\n\n----Display Successful.----\n\n")
+                    break
+            else:
+                print("\n\n----User not found.----\n\n")
+
+    # Option 5: Exit the program
+    if entry == 5:
+        print("\n\n------EXITING------\n\n")
+        break
+
+========================================================================================================================================================================================================================================================
+
+Solution.2:
+
+# ------------------ CLASS DEFINITIONS ------------------
+
+# Base class for all staff members
+class Staff:
+    def __init__(self, code, name):
+        self.code = code  # Unique staff code
+        self.name = name  # Staff member's name
+
+
+# Teacher class inherits from Staff
+class Teacher(Staff):
+    def __init__(self, code, name, subject, publication):
+        # Call parent constructor to set code and name
+        super().__init__(code, name)
+        self.subject = subject          # Subject taught by the teacher
+        self.publication = publication  # Publication details
+
+
+# Typist class inherits from Staff
+class Typist(Staff):
+    def __init__(self, code, name, speed):
+        super().__init__(code, name)
+        self.speed = speed  # Typing speed of the typist
+
+
+# Officer class inherits from Staff
+class Officer(Staff):
+    def __init__(self, code, name, grade):
+        super().__init__(code, name)
+        self.grade = grade  # Officer's grade
+
+
+# Regular Typist inherits from Typist
+class Regular(Typist):
+    def __init__(self, code, name, speed, salary):
+        # Call Typist constructor to set code, name, and speed
+        super().__init__(code, name, speed)
+        self.salary = salary  # Monthly salary
+
+
+# Casual Typist inherits from Typist
+class Casual(Typist):
+    def __init__(self, code, name, speed, daily_wages):
+        super().__init__(code, name, speed)
+        self.daily_wages = daily_wages  # Daily wage amount
+
+
+# ------------------ PROGRAM LOGIC ------------------
+
+# List to store all staff objects
+staff_list = []
+
+# Infinite loop for menu-driven program
+while True:
+    # Display menu and take user choice
+    entry = int(input(
+        "---Staff Management Menu---\n"
+        "1.Teacher\n"
+        "2.Officer\n"
+        "3.Regular Typist\n"
+        "4.Casual Typist\n"
+        "5.Show all Staffs\n"
+        "6.Exit\n\n"
+        "Enter your choice: "
+    ))
+
+    # Option 1: Add Teacher
+    if entry == 1:
+        # Input details separated by commas
+        code, name, subject, publication = input(
+            "Enter Code, Name, Subject, Publication: "
+        ).split(',')
+        staff_list.append(Teacher(code, name, subject, publication))
+        print("\n\n----Teacher added.----\n\n")
+
+    # Option 2: Add Officer
+    elif entry == 2:
+        code, name, grade = input(
+            "Enter Code, Name, Grade: "
+        ).split(',')
+        staff_list.append(Officer(code, name, grade))
+        print("\n\n----Officer added.----\n\n")
+
+    # Option 3: Add Regular Typist
+    elif entry == 3:
+        code, name, speed, salary = input(
+            "Enter Code, Name, Speed, Salary: "
+        ).split(',')
+        staff_list.append(Regular(code, name, speed, salary))
+        print("\n\n----Regular Typist added.----\n\n")
+
+    # Option 4: Add Casual Typist
+    elif entry == 4:
+        code, name, speed, wages = input(
+            "Enter Code, Name, Speed, Daily Wages: "
+        ).split(',')
+        staff_list.append(Casual(code, name, speed, wages))
+        print("\n\n----Casual Typist added.----\n\n")
+
+    # Option 5: Show all staff details
+    elif entry == 5:
+        if not staff_list:
+            print("\n\n----The list is empty----\n\n")
+        else:
+            # Loop through each staff object and print details
+            for staff in staff_list:
+                print(f"Name: {staff.name}")
+                # Check and print attributes dynamically
+                if hasattr(staff, 'subject'):
+                    print(f"Subject: {staff.subject}")
+                if hasattr(staff, 'publication'):
+                    print(f"Publication: {staff.publication}")
+                if hasattr(staff, 'speed'):
+                    print(f"Speed: {staff.speed}")
+                if hasattr(staff, 'grade'):
+                    print(f"Grade: {staff.grade}")
+                if hasattr(staff, 'salary'):
+                    print(f"Salary: {staff.salary}")
+                if hasattr(staff, 'daily_wages'):
+                    print(f"Daily Wages: {staff.daily_wages}")
+                print("\n----------\n")
+
+    # Option 6: Exit program
+    elif entry == 6:
+        print("\n\n----------EXITING----------\n\n")
+        break
+
+    # Invalid menu choice
+    else:
+        print("\n\n----------SELECT A VALID NUMBER----------\n\n")

@@ -1,0 +1,171 @@
+Question 1
+pi = 3.14
+r=float(input("Enter the value of radius: "))
+area =pi*r**2
+print(area)
+
+------------------------------------------------------------------------------------------------
+
+Question 2 
+import math
+f=float(input("Enter the temperature of city in fahrenheit degrees: "))
+c=(float((f-32)*(5/9)))
+print("%0.2f"%(c))
+
+------------------------------------------------------------------------------------------------
+
+Question 3 
+a=float(input("Enter 1st value"))
+b=float(input("Enter 2nd value"))
+op=input("enter the value of operator")
+
+if(op == '+'):
+	print(a+b)
+elif(op == '-'):
+    print(a-b)
+elif(op == '*'):
+    print(a*b)
+elif(op == '/'):
+    print(a/b)
+else:
+    print("operator doesn't exist")
+	
+------------------------------------------------------------------------------------------------
+	
+Question 4 
+import math
+n=float(input("Enter value"))
+result = math.sqrt(n)
+print(result)  
+
+------------------------------------------------------------------------------------------------
+
+Question 5:
+import cmath
+a =float(input("Enter value of a : "))
+b =float(input("Enter value of b : "))
+c =float(input("Enter value of c : "))
+discriminant= cmath.sqrt(b**2 - 4*a*c)
+solution1 = (-b + discriminant)/(2*a)
+solution2 = (-b - discriminant)/(2*a)
+print(f"solutions are: ", solution1 , " and ", solution2)
+
+------------------------------------------------------------------------------------------------
+
+Question 6
+import math
+a= int(input("Enter side a: "))
+b= int(input("Enter side b: "))
+c= int(input("Enter side c: "))
+s = (a+b+c)/2
+heron = (s*(s-a)*(s-b)*(s-c))
+Area= math.sqrt(heron)
+print(Area)import math
+a= int(input("Enter side a: "))
+b= int(input("Enter side b: "))
+c= int(input("Enter side c: "))
+s = (a+b+c)/2
+heron = (s*(s-a)*(s-b)*(s-c))
+Area= math.sqrt(heron)
+print(Area)
+
+------------------------------------------------------------------------------------------------
+
+Question 7
+n= int(input("Enter 5 digit number: "))
+sum = n%10
+n = int(n/10)
+sum += n%10
+n = int(n/10)
+sum += n%10
+n = int(n/10)
+sum += n%10
+n = int(n/10)
+sum += n
+print(int(sum))
+
+------------------------------------------------------------------------------------------------
+
+Question 8 
+text = """Twinkle, twinkle, little star,
+        How i wonder what you are!
+                Up above the world so high,
+                Like a diamond in the sky.
+Twinkle, Twinkle, Little Star,
+        How I wonder what you are"""
+print(text)
+
+------------------------------------------------------------------------------------------------
+
+Question9
+print("Name: ",name,"\nAge:", age,"\nAddress: ",addr)
+
+Question 9(input taken):
+
+name = input("What is your name?")
+age = int(input("What is your age?"))
+add = input("Provide your address")
+print(name,'\n', age,'\n', add)
+
+Question10
+text= "CDAC Noida'S DAI course"
+print (text)
+
+------------------------------------------------------------------------------------------------
+
+Question11
+text= """I'm learning - "CDAC Noida'S DAI course" """
+print (text)
+
+------------------------------------------------------------------------------------------------
+
+Question12
+ch= 'B'
+nmber= ord(ch)
+print (nmber)
+
+------------------------------------------------------------------------------------------------
+
+Question13
+nmber = 'abc'* 5
+print (nmber)
+
+------------------------------------------------------------------------------------------------
+
+Question14
+nmber = '-'* 50
+print (nmber)
+
+------------------------------------------------------------------------------------------------
+
+Question15
+text= "CDAC Noida'S DAI course"
+print (text.upper())
+
+------------------------------------------------------------------------------------------------
+
+Question16
+text= "Aswathama"
+new_text= text[0]+text[1]+text[len(text)-2]+text[len(text)-1]
+print(new_text)
+
+------------------------------------------------------------------------------------------------
+
+Question17
+text= "aswathama"
+fc= text[0]
+rc= '$'
+new_text= text[1:].replace(fc,rc)
+new_text= fc+ new_text
+print(new_text)
+
+------------------------------------------------------------------------------------------------
+
+Question18
+string1= input("Enter first string: ")
+string2= input("Enter second string: ")
+s2=string2[0:2]
+s1= string1[0:2]
+new_string=string1.replace(s1,s2)
+newer_string=string2.replace(s2,s1)
+print(new_string, " ",newer_string)

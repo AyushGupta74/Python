@@ -1,0 +1,146 @@
+Question1
+# Sum all elements in the list
+list1 = [10, 20, 30, 40, 60, 80]
+s = sum(list1)
+print(s)  # Output: 240
+
+
+
+Question2
+list1 = [10, 20, 30, 40, 60, 80]
+list2 = ['noida', 'cdac', 'dai', 'nxctc']
+
+# Find the maximum number in list1
+print(max(list1))  # Output: 80
+
+# Find the lexicographically largest string in list2
+print(max(list2))  # Output: 'nxctc'
+
+
+
+Question3
+list1 = [10, 20, 30, 40, 60, 80]
+list2 = ['noida', 'cdac', 'dai', 'nxctc']
+
+# Find the minimum number in list1
+print(min(list1))  # Output: 10
+
+# Find the lexicographically smallest string in list2
+print(min(list2))  # Output: 'cdac'
+
+
+
+Question4
+color_list = ["Red", "Green", "White", "Black"]
+
+# Print the first and last color in the list
+print(color_list[0], color_list[3])  # Output: Red Black
+
+
+
+Question5
+# Modify the word based on its ending
+word = input("Enter the word: ")
+
+if len(word) >= 3:
+    if word[-3:] == 'ing':
+        print(word + "ly")  # If word ends with 'ing', add 'ly'
+    else:
+        print(word + "ing")  # Otherwise, add 'ing'
+else:
+    print("word count too short")  # If word is too short
+	
+	
+
+Question6
+# Input marks for 5 subjects and calculate percentage
+math = int(input("Enter Math score: "))
+eng = int(input("Enter English score: "))
+sst = int(input("Enter Social Studies score: "))
+sci = int(input("Enter Science score: "))
+hindi = int(input("Enter Hindi score: "))
+
+# Calculate percentage out of 500
+per = int(((math + eng + sst + sci + hindi) / 500) * 100)
+print(per)
+
+# Determine division based on percentage
+if per >= 60:
+    print("First Division")
+elif 50 <= per <= 59:
+    print("Second Division")
+elif 40 <= per <= 49:
+    print("Third Division")
+else:
+    print("Fail")
+	
+	
+Question 7
+# Find the greatest among three numbers
+a = int(input("Enter number 1: "))
+b = int(input("Enter number 2: "))
+c = int(input("Enter number 3: "))
+
+if a > b and a > c:
+    print(a, "is greatest")
+elif b > c and b > a:
+    print(b, "is greatest")
+elif c > a and c > b:
+    print(c, "is greatest")
+else:
+    print("multiple values are equal")
+	
+	
+Question 8
+# Check if a year is a leap year
+year = int(input("Enter year: "))
+
+if (year % 4 == 0 or year % 400 == 0) and year % 100 != 0:
+    print("A leap year")
+else:
+    print("Not a leap year")
+	
+		
+Question9
+# Check if a string is a palindrome
+string1 = input("Enter string for palindrome: ")
+news = string1[::-1]  # Reverse the string
+print(news)
+
+if news == string1:
+    print("Palindrome")
+else:
+    print("N/A")
+	
+		
+Question10
+# Add a sublist to a deeply nested list
+list1 = ["a", "b", ["c", ["d", "e", ["f", "g"], "k"], "l"], "m", "n"]
+sublist = ["h", "i", "j"]
+
+# Extend the innermost list with new elements
+list1[2][1][2].extend(sublist)
+print(list1)
+
+
+Question 11
+# Replace the first occurrence of 20 with 200
+list1 = [5, 10, 15, 20, 25, 50, 20]
+num = 200
+
+for i in range(len(list1)):
+    if list1[i] == 20:
+        list1[i] = num
+        break  # Stop after replacing the first match
+
+print(list1)
+
+
+Question12
+# Rotate a list to the right by k positions
+numlist = [1, 2, 3, 4, 5]
+k = 2
+
+# Slice and concatenate to rotate
+ns = numlist[-k:] + numlist[:-k]
+print(ns)  # Output: [4, 5, 1, 2, 3]

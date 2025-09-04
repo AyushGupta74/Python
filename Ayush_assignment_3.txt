@@ -1,0 +1,179 @@
+# Question 1
+l1 = []
+for i in range(20):
+    if i % 2 != 0:  # Check if number is odd
+        l1.append(i)
+print(sum(l1))  # Output: 100     
+
+
+# Question 2
+l2 = []
+for i in range(101, 200):
+    l2.append(i)
+print(sum(l2))  # Output: 14950
+
+
+# Question 3
+l3 = []
+for i in range(0, 21, 2):  # Step by 2 to get even numbers
+    l3.append(i ** 2)
+print(sum(l3))  # Output: 770
+    
+
+# Question 4
+l5 = [22, 4, 16, 38, 13]
+
+x = f"""
+    'myList' = {l5}
+    L I S T  O P E R A T I O N S
+    1. Append an element
+    2. Insert an element at the desired position
+    3. Append a list to the given list
+    4. Modify an existing element
+    5. Delete an existing element by its position
+    6. Delete an existing element by its value
+    7. Sort the list in ascending order
+    8. Sort the list in descending order
+    9. Display the list
+    10. Exit
+    """
+
+choice = int(input((f"{x}\n ENTER YOUR CHOICE (1-10): ")))
+
+if choice == 1:
+    n = int(input("Enter element to append: "))
+    l5.append(n)
+    print(f"List: {l5}")
+
+elif choice == 2:
+    a = int(input("Enter element: "))
+    b = int(input("Enter position: "))
+    l5.insert(b, a)
+    print(f"List: {l5}")
+
+elif choice == 3:
+    l6 = list(map(int, input("Enter the list to append (space separated): ").split()))
+    l5.extend(l6)
+    print(f"List: {l5}")
+
+elif choice == 4:
+    b = int(input("Enter position to modify: "))
+    a = int(input("Enter new element: "))
+    l5[b] = a
+    print(f"List: {l5}")
+
+elif choice == 5:
+    b = int(input("Enter position to delete: "))
+    removed = l5.pop(b)
+    print(f"List: {l5}")
+   
+elif choice == 6:
+    a = int(input("Enter value to delete: "))
+    l5.remove(a)
+    print(f"List: {l5}")
+    
+elif choice == 7:
+    l5.sort()
+    print(f"List sorted in ascending order: {l5}")
+
+elif choice == 8:
+    l5.sort(reverse=True)
+    print(f"List sorted in descending order: {l5}")
+
+elif choice == 9:
+    print(f"Current List: {l5}")
+
+elif choice == 10:
+    print("Exiting program...")
+
+else:
+    print("Invalid choice! Please enter between 1-10.")
+
+
+# Question 5
+for i in range(65, 91):  # ASCII range for A-Z
+    print(f"{i} = {chr(i)}")
+
+
+# Question 6
+for i in range(48, 58):  # ASCII range for 0-9
+    print(f"{i} = {chr(i)}")
+
+
+# Question 7
+for i in range(97, 123):  # ASCII range for a-z
+    print(f"{i} = {chr(i)}")
+
+
+# Question 8 
+l7 = [100, 200, 300, 400, 500]
+print(list(reversed(l7)))  # Using built-in reversed()
+l7.reverse()               # In-place reversal
+print(l7)
+
+
+# Question 9
+list1 = [1, 2, 3, 4, 5, 6, 7]
+l8 = []
+for i in list1:
+    l8.append(i ** 2)
+print(l8)  # Output: [1, 4, 9, 16, 25, 36, 49]
+
+
+# Question 10 
+s = "Hello World"
+for i in "aeiou":
+    print(i, ":", s.count(i))  # Count each vowel
+
+
+# Question 11 
+st = input("Enter the string: ").split()  # Split into words
+st.sort()  # Sort alphabetically
+print(" ".join(st))  # Join back into a string
+
+
+# Question 12
+import string
+st = input("Enter the string: ")
+x = string.punctuation  # All punctuation characters
+for i in x:
+    st = st.replace(i, "")  # Remove each punctuation
+print(st)
+
+
+# Question 13 
+for i in range(1, 4):
+    for j in range(i, 0, -1):  # Print numbers in reverse
+        print(j, end="")
+    print()
+
+
+# Question 14
+for i in range(1,7):
+    for j in range(1, i+1):
+        print("*", end="")
+    print()
+
+
+# Question 15
+# Increasing part
+for i in range(1, 5):
+    for j in range(1, i + 1):
+        print("*", end="")
+    print()
+
+# Decreasing part
+for i in range(3, 0, -1):
+    for j in range(1, i + 1):
+        print("*", end="")
+    print()
+    
+
+# Question 16
+for i in range(1,11):
+    j = 1
+    print(f"{i} | ",end="")
+    while j<= 10:
+        print(i*j,end=" ")
+        j+=1
+    print()

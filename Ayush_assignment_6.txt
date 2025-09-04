@@ -1,0 +1,179 @@
+Solution.1:
+from datetime import datetime,timedelta
+
+date = input("Enter date [DD,MM,YYYY]: ")
+date_parts = tuple(map(int, date.strip().split(',')))
+date_obj = datetime(date_parts[2], date_parts[1],date_parts[0])
+new_date = date_obj - timedelta(weeks=1)
+print(f"Original date: {date_obj.strftime("%d-%m-%Y")}")
+print(f"Date one week earlier: {new_date.strftime("%d-%m-%Y")}")
+
+-------------------------------------------------------------------------------------------
+
+Solution.2:
+from datetime import datetime, timedelta
+
+date = input("Enter date [YYYY,MM,DD,Hour,Minute,Second]: ")
+date_parts = tuple(map(int, date.strip().split(',')))
+
+try:
+    date_obj = datetime(date_parts[0], date_parts[1], date_parts[2],
+                        date_parts[3], date_parts[4], date_parts[5])
+    new_date = date_obj + timedelta(weeks=1) + timedelta(hours=12)
+
+    print(f"Original date: {date_obj.strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Date one week and 12 hours later: {new_date.strftime('%Y-%m-%d %H:%M:%S')}")
+
+except ValueError as e:
+    print(f"Invalid date input: {e}")
+
+-------------------------------------------------------------------------------------------
+
+Solution3:
+from datetime import datetime, timedelta
+
+date = datetime.now()
+try:
+    for i in range(10):
+        date = date + timedelta(weeks=1)
+        print(f"Date {i+1} week later: {date.strftime('%Y-%m-%d')}")
+    
+except ValueError as e:
+    print(f"Invalid date input: {e}")
+
+-------------------------------------------------------------------------------------------
+
+Solution.4:
+from datetime import datetime, timedelta
+
+date1 = input("Enter date 1: [YYYY,MM,DD]: ")
+date2 = input("Enter date 2: [YYYY,MM,DD]: ")
+date_parts1 = tuple(map(int, date1.strip().split(',')))
+date_parts2 = tuple(map(int, date2.strip().split(',')))
+date_obj1 = datetime(date_parts1[0], date_parts1[1],date_parts1[2])
+date_obj2 = datetime(date_parts2[0], date_parts2[1],date_parts2[2])
+
+try:
+    date = date_obj2 - date_obj1
+    print(date.days,"days")
+    
+except ValueError as e:
+    print(f"Invalid date input: {e}")
+
+-------------------------------------------------------------------------------------------
+
+Solution5:
+from datetime import datetime
+
+print(f"a) Current date and time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\
+b) Current year in full:          {datetime.now().year}\n\
+c) Month of year full name:       {datetime.now().strftime("%B")}\n\
+d) Weekday of the week:           {datetime.now().weekday()}\n\
+e) Day of the month:              {datetime.now().day}\n\
+f) Day of week in full name:      {datetime.now().strftime('%A')}")
+
+-------------------------------------------------------------------------------------------
+
+Solution6:
+class Triangle:
+
+    number_of_sides = 3
+
+    def __init__(self,angle1,angle2,angle3):
+        self.angle1 = angle1
+        self.angle2 = angle2
+        self.angle3 = angle3
+
+    def check_angles(self):
+        if (self.angle1 + self.angle2 + self.angle3) == 180:
+            return True
+        else:
+            return False
+
+my_triangle = Triangle(90, 30, 60)
+print(my_triangle.number_of_sides)
+if my_triangle.check_angles() == True:
+    print("Triangle")
+else:
+    print("Not a Triangle")
+
+-------------------------------------------------------------------------------------------
+
+Solution7:
+class Song:
+
+    def __init__(self,lyrics):
+        self.lyrics = lyrics
+
+    def sing_me_a_song(self):
+        for elements in self.lyrics:
+            print(elements)
+
+happy_bday = Song(["May god bless you, ",
+                   "Have a sunshine on you,",
+                   "Happy Birthday to you !"])
+
+happy_bday.sing_me_a_song()
+
+-------------------------------------------------------------------------------------------
+
+Solution8:
+class Lunch:
+
+    def __init__(self,menu):
+        self.menu = menu
+
+    def menu_price(self):
+        if self.menu == "menu 1":
+            print(f"Your choice: {self.menu}, Price: 12.00")
+        elif self.menu == "menu 2":
+            print(f"Your choice: {self.menu}, Price: 13.40")
+        else:
+            print("Error in menu")
+
+Paul=Lunch("menu 1")
+Paul.menu_price()
+
+-------------------------------------------------------------------------------------------
+
+Solution9:
+class StringOperation:
+
+    def get_String(self,str):
+        self.str= str
+
+    def print_String(self):
+        print(f"String in upper case: {self.str.upper()}")
+
+string1= StringOperation()
+string1.get_String("cdac noida, sector62")
+string1.print_String()
+
+-------------------------------------------------------------------------------------------
+
+Solution10:
+class Rectangle:
+
+    def __init__(self,length,breadth):
+        self.length = length
+        self.breadth = breadth
+
+    def area(self):
+        print(f"Area of rectangle with {self.length} and breadth {self.breadth} is {self.length*self.breadth}")
+
+    def perimeter(self):
+        print(f"Perimeter of rectangle with {self.length} and breadth {self.breadth} is {2*(self.length+self.breadth)}")
+
+length = int(input("Enter length of rectangle: "))
+breadth = int(input("Enter breadth of rectangle: "))
+geo = Rectangle(length,breadth)
+while True:
+    num = input("1.Area\n2.Perimeter\n3.Exit")
+    if num == '1':
+        geo.area()
+    elif num == '2':
+        geo.perimeter()
+    elif num == '3':
+        break
+    else:
+        print("Enter valid number...")

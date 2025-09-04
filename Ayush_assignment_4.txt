@@ -1,0 +1,199 @@
+Question1:
+Write a Program to make a simple calculator that can add, subtract, multiply and divide using functions
+
+Solution:
+def add(x,y):
+    return x+y
+
+def sub(x,y):
+    return x-y
+
+def multiply(x,y):
+    return x*y
+
+def divide(x,y):
+    return x/y
+
+while True:
+    num= input('''Select operation: 
+1. Add
+2. Subtract
+3. Multiply
+4. Divide
+5. Exit
+Enter choice: (1/2/3/4/5): ''')
+    
+    if num=='1':
+        x= int(input("Enter number 1: "))
+        y= int(input("Enter number 2: "))
+        print(add(x,y))
+
+
+    elif num=='2':
+        x= int(input("Enter number 1: "))
+        y= int(input("Enter number 2: "))
+        sub(x,y)
+
+    elif num=='3':
+        x= int(input("Enter number 1: "))
+        y= int(input("Enter number 2: "))
+        multiply(x,y)
+
+    elif num=='4':
+        x= int(input("Enter number 1: "))
+        y= int(input("Enter number 2: "))
+        divide(x,y)
+    elif num=='5':
+        break
+
+    
+
+Question2:
+write a Program to display the Fibonacci sequence up to n-th term where n is provided by the user
+
+Solution:
+inp_st = int(input("Enter number for it's fibbonacci: "))
+if inp_st>0:
+    f,s = 0,1
+    print("Fibbonacci of",inp_st, " is: ")
+    for _ in range(inp_st) :
+        print(f, end=" ")
+        f,s= s,f+s
+else:
+    print("Enter valid number...")
+
+
+Question3:
+Write a Python Program To Display Powers of 2 Using Anonymous Function  
+( Lambda function). Take number of terms from user
+
+Solution:
+inp_st= int(input("Enter number: "))
+power = lambda x: inp_st**2
+print(power(inp_st))
+
+
+Question4:
+Write a Python Program to find numbers divisible by thirteen from a list using anonymous function
+Solution:
+inp_list= list(map(int, input("Enter number for list: ").split()))
+divisible = list(filter(lambda x: x % 13 ==0, inp_list))
+print(divisible)
+
+
+Question5:
+Write a Python program to display the Fibonacci sequence up to n-th term by using recursive functions
+Solution:
+def fibb(inp_st,f=0,s=1):
+    if inp_st==0:
+        return
+    print(f, end=" ")
+    fibb(inp_st-1,f=s,s=f+s)
+
+inp_st = int(input("Enter number for it's fibbonacci: "))
+if inp_st>0:
+    print("Fibbonacci is: ")
+    fibb(inp_st)
+else:
+    print("Enter valid number...")
+
+
+Question6:
+Write a Python program to find the sum of natural numbers up to n using recursive function
+Solution:
+def sum(inp_st):
+    if inp_st ==1:
+        return 1
+    return inp_st+sum(inp_st-1)
+
+inp_st = int(input("Enter number: "))
+if inp_st>0:
+    print("sum of natural numbers up to your numbers is: ", end=" ")
+    print(sum(inp_st))
+else:
+    print("Enter valid number...")
+
+
+Question7:
+Write a version of a palindrome recognizer that also accepts phrase palindromes such as "Go hang a salami I'm a lasagna hog.", "Was it a rat I saw?", "Step on no pets", "Sit on a potato pan, Otis", "Lisa Bonet ate no basil", "Satan, oscillate my metallic sonatas", "I roamed under it as a tired nude Maori", "Rise to vote sir", or the exclamation "Dammit, I'm mad!". Note that punctuation, capitalization, and spacing are usually ignored.
+
+Solution":
+import string
+def cleaned_text(text):
+    return ''.join(char for char in text if char not in string.punctuation and char !=' ').casefold()
+
+def is_palindrome(text):
+    clean= cleaned_text(text)
+    return clean == clean[::-1]
+
+inp_st=input("Enter a string: ")
+if is_palindrome(inp_st):
+    print("Palindrome")
+else:
+    print("Not a palindrome")
+
+
+Question8:
+A pangram is a sentence that contains all the letters of the English alphabet at least once, for example: The quick brown fox jumps over the lazy dog. Your task here is to write a function to check a sentence to see if it is a pangram or not.
+
+Solution:
+import string
+def cleaned_text(text):
+    return ''.join(char for char in text if char not in string.punctuation and char !=' ').casefold()
+
+def check(text):
+    return set(text)==set(string.ascii_lowercase)
+
+def is_pangram(text):
+    clean= cleaned_text(text)
+    return check(clean)
+
+inp_st=input("Enter a string: ")
+if is_pangram(inp_st):
+    print("Pangram")
+else:
+    print("Not a pangram")
+
+
+Question9:
+Define a function overlapping() that takes two lists and returns True if they have at least one
+member in common, False otherwise.
+
+Solution:
+def overlapping(l1,l2):
+    for num in l1:
+        if num in l2:
+            return True
+
+list1=[1,2,3,7]
+list2=[4,5,6,7,8]
+
+if overlapping(list1,list2):
+    print("Overlapping")
+else:
+    print("Try again...")
+
+
+Question10:
+Write a function find_longest_word() that takes a list of words and returns the length of the longest one.
+
+Solution:
+def find_longest_word(words):
+    long_word=""
+    for word in words:
+        if len(word)>len(long_word):
+            long_word=word
+    return long_word
+l1=["cdac", "noida", "ashok"]
+print(find_longest_word(l1))
+
+Question11:
+Write a function filter_long_words() that takes a list of words and an integer n and returns the list of words that are longer than n.
+
+Solution:
+def filter_long_words(words, n):
+    return [word for word in words if len(word) > n]
+
+word_list = ["hello", "world", "AI", "Copilot", "amazing"]
+filtered = filter_long_words(word_list, 4)
+print(filtered)

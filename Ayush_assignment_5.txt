@@ -1,0 +1,456 @@
+Working on: ***** PYTHON 3.9.6 *****
+
+Question.1: WAP to read data from a file
+
+Solution:
+with open(r"C:\Users\CDAC\Desktop\assignment_py\others\new.txt","r",encoding="utf-8") as f:
+    data= f.read()
+    print(data)
+
+Question.2:
+        Write a program that counts lines and characters in a file. With your favorite text editor, code 
+        a Python module called mymod.py, which exports three top-level names:
+        a) A countLines(name) function that reads an input file and counts the number of lines 
+        in it 
+        b) A countChars(name) function that reads an input file and counts the number of 
+        characters in it 
+        c) A test(name) function that calls both counting functions with a given input filename. 
+        All three mymod functions should expect a filename string to be passed in.
+        Now, test your module interactively, using import and name qualification to fetch your 
+        exports.
+
+Solution.2:
+        [testfile.txt]
+            hi cdac  ...
+            im a student!
+            from @UP
+
+        [mymod.py]
+            def countLines(name):
+                with open(name,"r", encoding="utf-8") as file:
+                    return (sum(1 for _ in file))
+
+            def countChars(name):
+                visible_count= 0
+                with open(name,"r", encoding="utf-8") as file:
+                    content = file.read()
+                    for ch in content:
+                        #if ch.isalnum(): # For only letters and digits
+                        if not ch.isspace(): # For letters,digits,characters. Filters out all types of whitespaces
+                            visible_count +=1
+                    return (visible_count)
+
+            def test(name):
+                print(f"Lines: {countLines(name)}")
+                print(f"Characters: {countChars(name)}")
+                
+            if __name__ == "__main__":
+                print("You're running a support file ")
+                path= "testfile.txt"
+
+                inp_path = input("Enter path of file (or press Enter for default[testfile.txt]): ")
+                if not inp_path:
+                    inp_path = path
+
+                print("Lines:", countLines(inp_path))
+                print("Characters:", countChars(inp_path))
+                test(inp_path)
+
+
+Question.3:
+        Test your mymod module from Exercise 2 interactively, by using from to load the exports 
+        directly, first by name, then using the from* variant to fetch everything.
+
+Solution.3:
+        [main.py]
+            # 1st variant 
+            from mymod import countLines,countChars,test
+
+            # 2nd variant -> from mymod import *
+
+            path= "testfile.txt"
+
+            inp_path = input("Enter path of file (or press Enter for default[testfile.txt]): ")
+
+            if not inp_path:
+                inp_path = path
+
+            print("Lines:", countLines(inp_path))
+            print("Characters:", countChars(inp_path))
+            test(inp_path)
+
+
+Question.4:
+        Now, add a line in your mymod module that calls the test function automatically only when 
+        the module is run as a script, not when it is imported The line you add will probably test the 
+        value of __name__ for the string "__main__",. Import the module and test its functions 
+        interactively.
+
+Solution.4:
+        [Already applied in Solution.2]
+            if __name__ == "__main__":
+                print("You're running a support file ")
+                path= "testfile.txt"
+
+                inp_path = input("Enter path of file (or press Enter for default[testfile.txt]): ")
+                if not inp_path:
+                    inp_path = path
+
+                print("Lines:", countLines(inp_path))
+                print("Characters:", countChars(inp_path))
+                test(inp_path)
+
+
+Question.5:
+        Write a second module, myclient.py, which imports mymod and tests its functions; 
+        run myclient from the system command line. If myclient uses from to fetch from mymod, 
+        will mymod’s functions be accessible from the top level of myclient? What if it imports 
+        with import instead? Try coding both variations in myclient and test interactively, by 
+        importing myclient .
+
+Solution.5:
+        [myclient.py]
+            # --- Import style 1: from-import by name ---
+            from mymod import countLines, countChars, test
+
+            # --- Import style 2: import whole module ---
+            import mymod
+
+            # Expose the from-imported functions at myclient's top level explicitly
+            # so they can be accessed as myclient.countLines, etc.
+            countLines = countLines
+            countChars = countChars
+            test = test
+
+            # File to test
+            path = "assignment5.txt"  # Change to your file path
+
+            print("---- Using from-import (by name) ----")
+            print("Lines:", countLines(path))
+            print("Characters:", countChars(path))
+            test(path)
+
+            print("\n---- Using plain import (module prefix) ----")
+            print("Lines:", mymod.countLines(path))
+            print("Characters:", mymod.countChars(path))
+            mymod.test(path)
+
+
+Question.6:
+        Package imports. Finally, import your file from a package. Create a subdirectory 
+        called mypkg nested in a directory on your module import search path, move 
+        the mymod.py module file you created in exercises 2 or 4 into the new directory, and try to 
+        import it with a package import of the form: import mypkg.mymod.
+
+Solution.6:
+        ~import mypkg.mymod
+        ~mkdir mypkg
+        Inside mypkg, create an empty file named __init__.py: __init__.py tells Python “this folder is a package”.
+        ~touch mypkg/__init__.py
+
+        ~mv mymod.py mypkg/
+
+        Now your structure looks like:
+            project_folder/
+            │
+            |--- mypkg/
+            │   ├── __init__.py
+            │   |── mymod.py
+
+        ~cd /path/to/project_folder
+        ~python3
+
+        >>> import mypkg.mymod
+
+        # Call functions with full path:
+        >>> mypkg.mymod.countLines("testfile.txt")
+        3
+        >>> mypkg.mymod.countChars("testfile.txt")
+        27
+
+        To import countLines, countChars, and test directly from the package 
+        without having to write mypkg.mymod every time:
+            [__init__.py]
+                from .mymod import countLines, countChars, test
+                    #pulls the functions into the package namespace.
+                    #so we can do [from mypkg import countLines]
+                    #and also this: [import mypkg]
+                    >>> mypkg.countLines("assignment5.txt")
+                __all__ = ["countLines", "countChars", "test"]
+                    #defines what gets imported if someone does [from mypkg import *].
+
+        ~pyhton3
+        >>> from mypkg.mymod import countLines, countChars, test
+        >>> countLines("testfile.txt")
+        3
+        >>> countChars("testfile.txt")
+        27
+
+        To Auto‑reload mymod if it's already loaded just
+        add the lines in top of the init file:
+            [__init__.py]
+                import importlib
+                import sys
+
+                # Import the module normally first
+                from . import mymod
+
+                # Auto‑reload mymod if it's already loaded (useful in interactive dev)
+                if "mypkg.mymod" in sys.modules:
+                    importlib.reload(mymod)
+
+
+Question.7:
+        Write a Python program to read first n lines of a file.
+
+Solution.7:
+        from itertools import islice
+
+        def read_first_n_lines(filename, n):
+            """Return the first n lines of a file as a list of strings."""
+            with open(filename, 'r', encoding='utf-8') as f:
+                return [line.rstrip('\n') for line in islice(f, n)]
+
+        if __name__ == "__main__":
+            path = input("Enter file path: ")
+            n = int(input("Enter number of lines to read: "))
+            for line in read_first_n_lines(path, n):
+                print(line)
+
+
+Question.8:
+        Write a Python program to append text to a file and display the text.
+
+Solution.8:
+        def append_and_display(filename, append_text):
+
+            """Appends text in a given filename"""
+            with open(filename, 'a', encoding='utf-8') as file:
+                file.write(append_text + "\n") # Adds a newline after the appended text
+                
+            """Read and display the full content"""
+            with open(filename, 'r', encoding='utf-8') as file:
+                for line in file:
+                    print(line.rstrip('\n')) #Clean printing without extra new lines
+
+        if __name__ == "__main__":
+            path = input("Enter file path: ")
+            text = input("Enter the txt to append: ")
+            append_and_display(path, text)
+
+
+Question.9:
+        Write a Python program to read a file line by line and store it into a list.
+
+Solution.9:
+        def read_file_to_list(filename):
+            """
+            Reads a file line by line and stores each line into a list.
+            """
+            with open(filename, 'r', encoding='utf-8') as file:
+                lines = [line.rstrip('\n') for line in file]
+            return lines
+
+        if __name__ == "__main__":
+            path = input("Enter the file path: ")
+            result = read_file_to_list(path)
+            print("\nLines stored in list:")
+            for line in result:
+                print(line)
+
+
+Question.10:
+        Write a program to print each line of a file in reverse order.
+
+Solution.10:
+        def read_file_to_list(filename):
+            """
+            Reads a file line by line and stores each line into a list in reverse order.
+            """
+            with open(filename, 'r', encoding='utf-8') as file:
+                lines = [line.rstrip('\n')[::-1] for line in file]
+            return lines
+
+        if __name__ == "__main__":
+            path = input("Enter the file path: ")
+            result = read_file_to_list(path)
+            print("\nLines stored in list:")
+            for line in result:
+                print(line)
+
+
+Question.11: 
+        Write a Python program to write a list content to a file.
+
+Solution.11:
+        def write_file_to_list(filename, data_list):
+            """
+            Reads a file line by line and stores each line into a list.
+            """
+            with open(filename, 'w', encoding='utf-8') as file:
+                for item in data_list:
+                    file.write(str(item)+ '\n')
+                print(f"Successfully wrote {len(data_list)} items to {filename}")
+
+        if __name__ == "__main__":
+            path = input("Enter the file path: ")
+            print("Enter list items (type 'END' to finish): ")
+
+            items = []
+            while True:
+                entry = input()
+                if entry.strip().upper() == "END":
+                    break
+                items.append(entry)
+
+            write_file_to_list(path, items)
+
+
+Question.12:
+        Write a program to compute the number of characters, words and lines in a file.
+
+Solution.12:
+        def file_stats(filename):
+            try:
+                with open(filename, 'r', encoding='utf-8') as file:
+                    lines = file.readlines()
+
+                word_count = sum(len(line.strip().split()) for line in lines)
+
+                # char_count = sum(len(line.strip().replace(' ', '')) for line in lines)
+                #Count characters that are only digits and alphabets, if you want to include other characters use "if not ch.isspace()" in last if
+                char_count = sum(1 for line in lines for ch in line if ch.isalnum())
+                
+                line_count = len([line for line in lines if line.strip()])
+
+                return word_count,line_count,char_count
+            
+            except Exception as e:
+                print(f"Error: {e}")
+                return 0,0,0
+
+        if __name__ == "__main__":
+            path = input("Enter the file path: ")
+
+            # Call the function and unpack the returned values
+            words,lines,chars= file_stats(path)
+
+            # Print the results with formatted spacing
+            print(f"Words: {words:>10}")     # Right-aligned in 10 spaces
+            print(f"Lines: {lines:>10}")
+            print(f"Characters: {chars:>5}") # Right-aligned in 5 spaces
+
+
+Question.13:
+        Write a program to accept string/sentences from the user till the user enters “END” to. Save 
+        the data in a text file and then display only those sentences which begin with an uppercase 
+        alphabet.
+
+Solution.13:
+        def save_sentences(filename):
+            """
+            Accepts sentences from the user until 'END' is entered.
+            Saves them to a file, one per line.
+            """
+            try:
+                print("Enter sentence(s) [type 'END' to finish]: ")
+                with open(filename, 'w', encoding='utf-8') as file:
+                    while True:
+                        sentence = input()
+                        if sentence.strip().upper() == "END":
+                            break
+                        file.write(sentence.strip() + '\n')
+            
+            except Exception as e:
+                print(f"Error: {e}")
+
+        def display_uppercase_sentences(filename):
+            """
+            Reads the file and displays only sentences that begin with an uppercase letter.
+            """
+            print("\nSentences starting with an uppercase letter:")
+            try:
+                with open(filename, 'r', encoding='utf') as file:
+                    for line in file:
+                        stripped = line.strip()
+                        if stripped and stripped[0].isupper():
+                            print(stripped)
+
+            except Exception as e:
+                print(f"Error is: {e}")
+                return
+
+        if __name__ == "__main__":
+            path = "sentences.txt"
+            
+            save_sentences(path)
+            display_uppercase_sentences(path)
+
+Question.14:
+        Write a program to enter the following records in a binary file: 
+
+        Item No     integer 
+        Item_Name   string 
+        Qty         integer 
+        Price       float 
+
+        Number of records to be entered should be accepted from the user. Read the file to display the 
+        records in the following format: 
+
+        Item No: 
+        Item Name : 
+        Quantity: 
+        Price per item: 
+        Amount: ( to be calculated as Price * Qty)
+
+Solution.14:
+        import pickle 
+
+        def write_records(filename, num_records):
+            """
+            Accepts item records from the user and writes them to a binary file.
+            Each record is stored as a dictionary.
+            """
+            with open(filename,'wb') as file:
+                for i in range(num_records):
+                    print(f"Enter details for item {i+1}: ")
+                    item_no = int(input("Item No: "))
+                    item_name = input("Item Name: ")
+                    qty = int(input("Quantity: "))
+                    price = float(input("Price per item: "))
+
+                    record = {
+                        'Item_No': item_no,
+                        'Item_Name' : item_name,
+                        'Quantity': qty,
+                        'Price': price
+                    }
+                    
+                    pickle.dump(record, file) #write each record to the binary file
+
+        def read_and_display_records(filename):
+            """
+            Reads item records from a binary file and displays them with calculated amount.
+            """  
+            print("---- Item records: ----")
+            try:
+                with open(filename, 'rb') as file:
+                    record = pickle.load(file)
+                    amount = record['Price'] * record['Quantity']
+                    print(f"\nItem No     : {record['Item_No']}")
+                    print(f"Item Name     : {record['Item_Name']}")
+                    print(f"Quantity      : {record['Quantity']}")
+                    print(f"Price per item: ₹{record['Price']:.2f}")
+                    print(f"Amount        : ₹{amount:.2f}")
+
+            except Exception as e:
+                print(f"Error: {e}")
+
+        if __name__ =="__main__":
+            path = "record.dat"
+            try:
+                num_records = int(input("Enter number of records to store: ")) 
+                write_records(path,num_records)
+                read_and_display_records(path)
+            except Exception as e:
+                print(f"Error: {e}")
